@@ -2,7 +2,10 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
@@ -22,6 +25,15 @@ public class SecondActivity extends AppCompatActivity {
            message_name.setText("Имя: " + name);
            message_surname.setText("Фамилия: " + surname);
         }
+        Button VVButton = findViewById(R.id.enter_button);
+
+        VVButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
