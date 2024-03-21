@@ -14,26 +14,25 @@ public class NewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
-        TextView message = new TextView(this);
-        message.setTextSize(26);
-        message.setPadding(16,16,16,16);
+
+        TextView message = (TextView) findViewById(R.id.new_message);
+
         MyObject objectInput = (MyObject) getIntent().getSerializableExtra("object");
 
         if(objectInput!=null){
-            message.setText("Имя: " + objectInput.getName() + "\nВозраст: " + objectInput.getAge());
+            String username = getString(R.string.user_name) + ": ";
+            String userage = getString(R.string.user_age) + ": ";
+            message.setText(username + objectInput.getName() + "\n" +  userage + objectInput.getAge());
         }
-        setContentView(message);
 
         Button BackButton = findViewById(R.id.back_button);
 
-//        BackButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(NewActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
