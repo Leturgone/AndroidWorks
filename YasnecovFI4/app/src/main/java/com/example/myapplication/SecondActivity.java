@@ -12,12 +12,15 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         //Получаем данные
-        TextView message = (TextView) findViewById(R.id.text_info);
+        TextView message_name = (TextView) findViewById(R.id.text_name_info);
+        TextView message_surname = (TextView) findViewById(R.id.text_surname_info);
+
         Bundle arguments = getIntent().getExtras();
         if (arguments != null){
            String name = arguments.get("name").toString();
            String surname = arguments.get("surname").toString();
-           message.setText("Имя: " + name + "\nФамилия: " + surname);
+           message_name.setText("Имя: " + name);
+           message_surname.setText("Фамилия: " + surname);
         }
 
     }
