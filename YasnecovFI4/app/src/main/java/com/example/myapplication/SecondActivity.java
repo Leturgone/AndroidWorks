@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -10,5 +11,14 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        //Получаем данные
+        TextView message = (TextView) findViewById(R.id.text_info);
+        Bundle arguments = getIntent().getExtras();
+        if (arguments != null){
+           String name = arguments.get("name").toString();
+           String surname = arguments.get("surname").toString();
+           message.setText("Имя: " + name + "\nФамилия: " + surname);
+        }
+
     }
 }
