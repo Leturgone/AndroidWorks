@@ -27,10 +27,13 @@ public class ThirdActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Получение ссылок на виджеты
                 EditText dateText = findViewById(R.id.editTextDate);
+                EditText dayText = findViewById(R.id.editTextTime);
                 //Получение значений
                 String date = dateText.getText().toString();
+                String time = dayText.getText().toString();
                 Intent resultIntent =new Intent(ThirdActivity.this, SecondActivity.class);
                 resultIntent.putExtra("date", date);
+                resultIntent.putExtra("time", time);
                 setResult(RESULT_OK,resultIntent);
                 finish();
             }

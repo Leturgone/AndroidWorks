@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -33,34 +34,32 @@ public class SecondActivity extends AppCompatActivity {
         }
         Button VVButton = findViewById(R.id.enter_button);
 
-        VVButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
     }
-    static final String ACCESS_MESSAGE = "ACCESS_MESSAGE";
 
+    public void onThirdActivity(View view){
+        Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+        mStartForResult.launch(intent);
+    }
     ActivityResultLauncher<Intent> mStartForResult =
             registerForActivityResult(new
                             ActivityResultContracts.StartActivityForResult(),
                     new ActivityResultCallback<ActivityResult>() {
                         @Override
                         public void onActivityResult(ActivityResult result) {
-                            EditText nameText = findViewById(R.id.text_name);
-                            EditText surText = findViewById(R.id.text_surname);
+                            TextView message_date = (TextView) findViewById(R.id.date_text_info);
                             if(result.getResultCode() == Activity.RESULT_OK){
                                 Intent intent = result.getData();
-                                String accessMessage = intent.getStringExtra(ACCESS_MESSAGE);
-                                nameText.setText(accessMessage);
-
+                                String date = intent.getStringExtra("date");
+                                String time = intent.getStringExtra("time");
+                                message_date.setText("Дата занятия: " + date + " " + time);
+                                Toast.makeText(SecondActivity.this,"Данные о дате переданы успешно",Toast.LENGTH_LONG).show();
                             }
                             else{
-                                nameText.setText("ffff");
+                                Toast.makeText(SecondActivity.this,"Нет данных",Toast.LENGTH_LONG).show();
                             }
                         }
                     });
+
 }
