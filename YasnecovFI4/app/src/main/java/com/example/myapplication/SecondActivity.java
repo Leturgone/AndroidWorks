@@ -1,11 +1,17 @@
 package com.example.myapplication;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
@@ -36,4 +42,25 @@ public class SecondActivity extends AppCompatActivity {
         });
 
     }
+    static final String ACCESS_MESSAGE = "ACCESS_MESSAGE";
+
+    ActivityResultLauncher<Intent> mStartForResult =
+            registerForActivityResult(new
+                            ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>() {
+                        @Override
+                        public void onActivityResult(ActivityResult result) {
+                            EditText nameText = findViewById(R.id.text_name);
+                            EditText surText = findViewById(R.id.text_surname);
+                            if(result.getResultCode() == Activity.RESULT_OK){
+                                Intent intent = result.getData();
+                                String accessMessage = intent.getStringExtra(ACCESS_MESSAGE);
+                                nameText.setText(accessMessage);
+
+                            }
+                            else{
+                                nameText.setText("ffff");
+                            }
+                        }
+                    });
 }
