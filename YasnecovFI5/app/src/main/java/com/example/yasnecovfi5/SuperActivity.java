@@ -31,10 +31,12 @@ public class SuperActivity extends AppCompatActivity {
         superListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 //переход на активность:
                 if (position == 0){
                     startActivity(new Intent(SuperActivity.this, RecActivity.class));
+                }
+                if (position == 1){
+                    startActivity(new Intent(SuperActivity.this, ScrollActivity.class));
                 }
             }
         });

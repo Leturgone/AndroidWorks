@@ -23,10 +23,21 @@
         android:id="@+id/musicle_list"
         android:layout_width="341dp"
         android:layout_height="491dp"
+        android:choiceMode="multipleChoice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.435" />
+
+    <TextView
+        android:id="@+id/choose_names"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выбрано:"
+        app:layout_constraintBottom_toTopOf="@+id/musicle_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

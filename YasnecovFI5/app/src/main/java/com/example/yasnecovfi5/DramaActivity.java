@@ -30,7 +30,7 @@ public class DramaActivity extends AppCompatActivity {
 
                 //переход на активность:
                 if (position == 1){
-                    startActivity(new Intent(DramaActivity.this, ScrollActivity.class));
+                    startActivity(new Intent(DramaActivity.this, SpinActivity.class));
                 }
             }
         });
