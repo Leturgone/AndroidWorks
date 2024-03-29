@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 //Получаем выбранный элемент по позиции
                 String selectedItem = genreList[position];
                 //переход на активность:
-                 if (position == 1){
+                 if (position == 0){
                      startActivity(new Intent(MainActivity.this, SuperActivity.class));
                  }
-                 else if (position == 2){
+                 else if (position == 1){
                      startActivity(new Intent(MainActivity.this, MusicleActivity.class));
                  }
-                 else if (position ==3){
+                 else if (position ==2){
                      startActivity(new Intent(MainActivity.this, DramaActivity.class));
                  }
             }
