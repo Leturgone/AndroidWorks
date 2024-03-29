@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
         genreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Получаем выбранный элемент по позиции
-                String selectedItem = genreList[position];
+
                 //переход на активность:
                  if (position == 0){
                      startActivity(new Intent(MainActivity.this, SuperActivity.class));
