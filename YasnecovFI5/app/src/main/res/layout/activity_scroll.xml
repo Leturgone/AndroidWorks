@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Крутая рецезия"
+                android:text="Крутая рецензия"
                 android:textSize="40dp" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Прекрасная рецезия"
+                android:text="Прекрасная рецензия"
                 android:textSize="30dp" />
 
             <EditText
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Ваша рецезия"
+                android:hint="Ваша рецензия"
                 android:inputType="text"
                 android:textSize="30dp" />
 
