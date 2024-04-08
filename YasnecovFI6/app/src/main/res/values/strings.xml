@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YasnecovFI6</string>
+    <string name="drawler_open">Открыть</string>
+    <string name="drawler_close">Закрыть</string>
 </resources>
