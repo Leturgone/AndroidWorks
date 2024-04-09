@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">YasnecovFI6</string>
-    <string name="drawler_open">Открыть</string>
-    <string name="drawler_close">Закрыть</string>
+    <string name="drawer_open">Открыть</string>
+    <string name="drawer_close">Закрыть</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

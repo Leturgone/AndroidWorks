@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,14 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
         //Работа с тулбаром
         toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
-                MainActivity.this, drawer, R.string.drawler_open, R.string.drawler_close);
+                MainActivity.this, drawer, R.string.drawer_open, R.string.drawer_close);
 
         if (drawer != null){
             drawer.addDrawerListener(toggle);
+
         }
 
         //синхронизирует текущее состояние
@@ -41,9 +43,12 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if(actionBar != null) {
+            actionBar.setTitle("Постеры фильма");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-        actionBar.setTitle("Постеры фильма");
+
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
@@ -82,4 +87,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
