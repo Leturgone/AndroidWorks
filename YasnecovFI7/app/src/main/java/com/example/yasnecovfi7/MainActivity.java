@@ -1,5 +1,6 @@
 package com.example.yasnecovfi7;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,6 +16,20 @@ public class MainActivity extends AppCompatActivity {
         //Запуск сервиса для вопроизведения музыки
         Intent startIntant = new Intent(this, MyService.class);
         startService(startIntant);
+
+        //Диалоговые окна
+
+        //Создание строителя диалоговых окон
+        AlertDialog.Builder builder =  new AlertDialog.Builder(MainActivity.this);
+
+        //Установка сообщения диалогового окна
+        builder.setTitle("Подтверждение");
+        builder.setMessage("Вы увидели это окно?");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        //Установка кнопки Да и ее обработчика
+
+
     }
     @Override
     protected void onDestroy(){
