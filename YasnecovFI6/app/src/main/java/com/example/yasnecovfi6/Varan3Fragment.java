@@ -8,11 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Varan3Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Varan3Fragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
