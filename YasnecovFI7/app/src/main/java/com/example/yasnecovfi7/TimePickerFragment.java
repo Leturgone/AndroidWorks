@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class TimePickerFragment extends Fragment {
@@ -37,13 +38,20 @@ public class TimePickerFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_time_picker, container, false);
+        View view = inflater.inflate(R.layout.fragment_time_picker, container, false);
+
+        TextView textView = (TextView) view.findViewById(R.id.timeView);
+        int hour = getArguments().getInt("hour");
+        int minute = getArguments().getInt("minute");
+        textView.setText("Время "+hour + ":" + minute);
+
+        return view;
     }
 }
