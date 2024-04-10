@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,19 +56,18 @@ public class MainActivity extends AppCompatActivity {
         //Создание и отображение TimePickerDialog
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            public void onTimeSet(TimePicker view, int hour, int minute) {
                 //Обработка выбранного времени
                 Fragment tempFragment  = new TimePickerFragment();
                 //Передача данных фргаменту
                 Bundle args = new Bundle();
-                args.putInt("hours",hour);
-                args.putInt("minutes",minute);
+                args.putInt("h",hour);
+                args.putInt("m",minute);
                 tempFragment.setArguments(args);
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.alert_fragment, tempFragment).commit();
             }
         },hour, minute,true);
-
 
 
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         time_pickrButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                timePickerDialog.show();
             }
         });
         custom_dialofButton.setOnClickListener(new View.OnClickListener() {

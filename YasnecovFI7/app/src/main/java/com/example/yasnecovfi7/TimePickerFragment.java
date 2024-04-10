@@ -48,9 +48,9 @@ public class TimePickerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_time_picker, container, false);
 
         TextView textView = (TextView) view.findViewById(R.id.timeView);
-        int hour = getArguments().getInt("hour");
-        int minute = getArguments().getInt("minute");
-        textView.setText("Время "+hour + ":" + minute);
+        int hour = getArguments().getInt("h");
+        int minute = getArguments().getInt("m");
+        textView.setText("Время " + hour + ":" + minute);
 
         return view;
     }
