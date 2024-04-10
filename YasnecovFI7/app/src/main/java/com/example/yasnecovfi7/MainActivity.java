@@ -3,6 +3,7 @@ package com.example.yasnecovfi7;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -28,7 +29,24 @@ public class MainActivity extends AppCompatActivity {
         builder.setIcon(android.R.drawable.ic_dialog_alert);
 
         //Установка кнопки Да и ее обработчика
+        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+
+        //Установка кнопки Отмена и ее обработчика
+        builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        //Создание и отбражение AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
     @Override
