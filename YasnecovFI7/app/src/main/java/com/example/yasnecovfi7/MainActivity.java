@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -90,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
         //Создание DatePickerDialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 MainActivity.this, dateSetListener, year, month,day);
+
+
+
+        //Создание кастомного окна
+
+        //Создание диалога
+        Dialog dialog = new Dialog(MainActivity.this);
 
         //Кнопки для появления окон
 
