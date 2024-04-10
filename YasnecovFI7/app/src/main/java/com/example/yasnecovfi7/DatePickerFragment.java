@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class DatePickerFragment extends Fragment {
@@ -44,7 +45,17 @@ public class DatePickerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_date_picker, container, false);
+        View view = inflater.inflate(R.layout.fragment_date_picker, container, false);
+        TextView textView = (TextView) view.findViewById(R.id.yearView);
+        int year = getArguments().getInt("year");
+        int month = getArguments().getInt("month") + 1;
+        int day = getArguments().getInt("day");
+        if( month <10 ) {
+            textView.setText(day + "." + "0"+month + "." + year);
+        }
+        else{
+            textView.setText(day + "."+month + "." + year);
+        }
+        return view;
     }
 }

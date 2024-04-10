@@ -51,7 +51,6 @@ public class TimePickerFragment extends Fragment {
         int hour = getArguments().getInt("h");
         int minute = getArguments().getInt("m");
         textView.setText("Время " + hour + ":" + minute);
-
         return view;
     }
 }
