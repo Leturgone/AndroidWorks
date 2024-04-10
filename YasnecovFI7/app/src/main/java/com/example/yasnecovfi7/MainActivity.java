@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -98,7 +99,25 @@ public class MainActivity extends AppCompatActivity {
 
         //Создание диалога
         Dialog dialog = new Dialog(MainActivity.this);
+        //Установка макета для диалогоовго окна
+        dialog.setContentView(R.layout.custom_dialog);
+        //Настройка элементов в макете
+        Button button = dialog.findViewById(R.id.button);
+        EditText editText = dialog.findViewById(R.id.editTextText);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = editText.getText().toString();
+                Fragment tempFragment = new CustomDialogFragment();
+                Bundle args = new Bundle();
+                args.putString("input",text);
+                tempFragment.setArguments(args);
+                getSupportFragmentManager().beginTransaction().replace(R.id.alert_fragment,tempFragment).commit();
+                dialog.dismiss();
 
+
+            }
+        });
         //Кнопки для появления окон
 
         Button alertButton = findViewById(R.id.alert_button);
@@ -129,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         custom_dialofButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.show();
 
             }
         });
