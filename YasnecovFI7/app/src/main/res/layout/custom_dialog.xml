@@ -12,7 +12,6 @@
         android:ems="10"
         android:inputType="text"
         android:hint="Введите текст"
-
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
