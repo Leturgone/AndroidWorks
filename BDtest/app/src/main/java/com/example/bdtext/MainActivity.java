@@ -1,6 +1,7 @@
 package com.example.bdtext;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     MyDatabaseHelper myDB;
 
     ArrayList<String> book_id, book_title, book_author, book_pages;
+    CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,12 @@ public class MainActivity extends AppCompatActivity {
         book_title = new ArrayList<>();
         book_author = new ArrayList<>();
         book_pages = new ArrayList<>();
+
         storeDataInArrays();
+
+        customAdapter = new CustomAdapter(MainActivity.this, book_id, book_title, book_author, book_pages);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
     void  storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
