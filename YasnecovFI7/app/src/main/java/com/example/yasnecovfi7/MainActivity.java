@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         Intent startIntant = new Intent(this, MyService.class);
         startService(startIntant);
 
-        //Диалоговые окна
+        //Диалоговые окна/
+
 
         //Создание строителя диалоговых окон
         AlertDialog.Builder builder =  new AlertDialog.Builder(MainActivity.this);
