@@ -18,7 +18,6 @@ public class CustomDialogFragment extends Fragment {
     private String mParam2;
 
     public CustomDialogFragment() {
-        // Required empty public constructor
     }
 
     public static CustomDialogFragment newInstance(String param1, String param2) {
