@@ -20,7 +20,6 @@ public class MusicleActivity extends AppCompatActivity {
 
     ArrayList<String> movies = new ArrayList<String>();
 
-
     ArrayList<String> selectedMusicles = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
