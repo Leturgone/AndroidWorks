@@ -15,7 +15,6 @@ public class NewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new);
 
         TextView message = (TextView) findViewById(R.id.new_message);
-
         MyObject objectInput = (MyObject) getIntent().getSerializableExtra("object");
 
         if(objectInput!=null){
