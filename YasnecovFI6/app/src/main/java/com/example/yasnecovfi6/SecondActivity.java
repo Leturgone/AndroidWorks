@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 public class SecondActivity extends AppCompatActivity {
     public Toolbar toolbar;
     @Override
