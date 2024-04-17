@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-public class MyWorler extends Worker {
+public class MyWorker extends Worker {
     public final String TAG = "MY_TAG";
-    public MyWorler(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public MyWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
