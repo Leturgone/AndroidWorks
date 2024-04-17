@@ -1,3 +1,0 @@
-com.example.yasnecovfi3.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
