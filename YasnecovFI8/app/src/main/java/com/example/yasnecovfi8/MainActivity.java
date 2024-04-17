@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button PosledBtn, ParalelBtn;
+    Button PosledBtn, ParalelBtn, DownloadBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PosledBtn = findViewById(R.id.posled_btn);
         ParalelBtn = findViewById(R.id.paralel_btn);
+        DownloadBtn = findViewById(R.id.download_button);
 
         OneTimeWorkRequest work1 =
                 new OneTimeWorkRequest.Builder(MyWorker.class).build();
@@ -42,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
                 list.add(work2);
                 WorkManager.getInstance().enqueue(list);
 
+            }
+        });
+        DownloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
             }
         });
     }
