@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Главная"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/options"
+        android:title="Настройки"
+        android:icon="@drawable/ic_option"/>
+    <item
+        android:id="@+id/notifications"
+        android:title="Уведомления"
+        android:icon="@drawable/ic_notification"/>
+</menu>

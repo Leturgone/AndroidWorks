@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">YsnecovFI3v2</string>
+    <string name="user_name">Имя</string>
+    <string name="user_age">Возраст</string>
+    <string name="back_act">Назад</string>
+    <string name="to_activity">Активность с данными</string>
+
+</resources>

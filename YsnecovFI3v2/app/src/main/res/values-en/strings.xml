@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YsnecovFI3v2</string>
+    <string name="user_name">Name</string>
+    <string name="user_age">Age</string>
+    <string name="back_act">Back</string>
+    <string name="to_activity">Data Activity</string>
+</resources>
