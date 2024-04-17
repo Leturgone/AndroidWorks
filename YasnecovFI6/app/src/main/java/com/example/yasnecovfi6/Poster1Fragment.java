@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 
 
 
-
-
-
 public class Poster1Fragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
