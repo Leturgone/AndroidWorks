@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     Button PosledBtn, ParalelBtn;
     @Override
@@ -34,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         ParalelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<OneTimeWorkRequest> list = new ArrayList<>();
+                list.add(work1);
+                list.add(work2);
+                WorkManager.getInstance().enqueue(list);
+
             }
         });
     }
