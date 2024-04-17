@@ -17,20 +17,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         PosledBtn = findViewById(R.id.posled_btn);
         ParalelBtn = findViewById(R.id.paralel_btn);
-        // устанавливаем обработчик на кнопку "Начать в потоке"
+
+        OneTimeWorkRequest work1 =
+                new OneTimeWorkRequest.Builder(MyWorker.class).build();
+        OneTimeWorkRequest work2 =
+                new OneTimeWorkRequest.Builder(MySecondWorker.class).build();
+        OneTimeWorkRequest work3 =
+                new OneTimeWorkRequest.Builder(MyThirdWorker.class).build();
         PosledBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OneTimeWorkRequest work1 =
-                        new OneTimeWorkRequest.Builder(MyWorker.class).build();
-                OneTimeWorkRequest work2 =
-                        new OneTimeWorkRequest.Builder(MySecondWorker.class).build();
-                OneTimeWorkRequest work3 =
-                        new OneTimeWorkRequest.Builder(MyThirdWorker.class).build();
                 WorkManager.getInstance().beginWith(work1).then(work2).then(work3).enqueue();
             }
         });
-        // устанавливаем обработчик на кнопку "Начать не в потоке"
+
         ParalelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
