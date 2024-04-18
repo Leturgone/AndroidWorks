@@ -63,43 +63,22 @@ public class MainActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new
-                        AlertDialog.Builder(MainActivity.this);
                 filename = FileName.getText().toString() + ".txt";
-                // Установка заголовка и сообщения диалогового окна
-                builder.setTitle("Подтверждение");
-                builder.setMessage("Вы уверены, что хотите удалить "+ filename +  " ?" );
-                builder.setIcon(android.R.drawable.ic_dialog_alert);
-
-                // Установка кнопки "Да" и ее обработчика
-                builder.setPositiveButton("Да", new
-                        DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Получаем файловый объект для файла из внутреннего хранилища
-                                File dir = getFilesDir();
-                                File file = new File(dir, filename);
-                                // Удаляем файл
-                                boolean deleted = file.delete();
-                                if (deleted){
-                                    Toast.makeText(MainActivity.this,"Файл удален",Toast.LENGTH_SHORT).show();
-                                }
-                                else{
-                                    Toast.makeText(MainActivity.this,"Ошибка при удалении",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                // Установка кнопки "Отмена" и ее обработчика
-                builder.setNegativeButton("Отмена", new
-                        DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Обработка отмены действия
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                String fileContents = FileStore.getText().toString() ;
+                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "MyDirectory");
+                if (dir.exists()) {
+                    File file = new File(dir, filename);
+                    // Для удаления файла
+                    boolean deleted = file.delete();
+                    if (deleted) {
+                        Toast.makeText(MainActivity.this, "Файл удален", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {
