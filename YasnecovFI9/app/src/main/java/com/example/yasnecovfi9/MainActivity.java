@@ -1,8 +1,10 @@
 package com.example.yasnecovfi9;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText FileName, FileStore;
     Button saveButton, readButton, deleteButton, addButton;
     TextView fileInf;
+    String filename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
         fileInf = findViewById(R.id.textView);
         Context context = MainActivity.this;
 
+
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String filename = FileName.getText().toString();
-                String fileContents = FileStore.getText().toString();
+                filename = FileName.getText().toString() + ".txt";
+                String fileContents = FileStore.getText().toString() ;
                 //Открываем поток для записи. Если документ не создан, то он будетmсоздан автоматически
                 try (FileOutputStream fos = context.openFileOutput(filename,
                         Context.MODE_PRIVATE)) {
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         readButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String filename = FileName.getText().toString();
+                filename = FileName.getText().toString() + ".txt";
                 try (FileInputStream fis = context.openFileInput(filename)) {
                     InputStreamReader inputStreamReader = new
                             InputStreamReader(fis, StandardCharsets.UTF_8);
@@ -79,10 +85,48 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder = new
+                        AlertDialog.Builder(MainActivity.this);
+                filename = FileName.getText().toString() + ".txt";
+                // Установка заголовка и сообщения диалогового окна
+                builder.setTitle("Подтверждение");
+                builder.setMessage("Вы уверены, что хотите удалить "+ filename +  " ?" );
+                builder.setIcon(android.R.drawable.ic_dialog_alert);
 
+                // Установка кнопки "Да" и ее обработчика
+                builder.setPositiveButton("Да", new
+                        DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Получаем файловый объект для файла из внутреннего хранилища
+                                File dir = getFilesDir();
+                                File file = new File(dir, filename);
+                                // Удаляем файл
+                                boolean deleted = file.delete();
+                                if (deleted){
+                                    Toast.makeText(MainActivity.this,"Файл удален",Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(MainActivity.this,"Ошибка при удалении",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+// Установка кнопки "Отмена" и ее обработчика
+                builder.setNegativeButton("Отмена", new
+                        DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Обработка отмены действия
+                                dialog.dismiss();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {
