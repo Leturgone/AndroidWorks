@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         // Восстанавливаем сохраненное состояние
         String state = savedInstanceState.getString("KEY_STATE");
+
         fileInf.setText(state);
 
     }
