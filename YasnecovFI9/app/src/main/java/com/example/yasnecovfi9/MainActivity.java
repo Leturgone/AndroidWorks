@@ -8,9 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
     EditText FileName, FileStore;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.add_button);
 
         fileInf = findViewById(R.id.textView);
+        Context context = MainActivity.this;
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 String filename = FileName.getText().toString();
                 String fileContents = FileStore.getText().toString();
                 //Открываем поток для записи. Если документ не создан, то он будетmсоздан автоматически
-                try (FileOutputStream fos = (MainActivity.this).openFileOutput(filename,
+                try (FileOutputStream fos = context.openFileOutput(filename,
                         Context.MODE_PRIVATE)) {
                     //Записываем текст в файл, переведя его в массив байт
                     fos.write(fileContents.getBytes());
@@ -50,6 +56,26 @@ public class MainActivity extends AppCompatActivity {
         readButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String filename = FileName.getText().toString();
+                try (FileInputStream fis = context.openFileInput(filename)) {
+                    InputStreamReader inputStreamReader = new
+                            InputStreamReader(fis, StandardCharsets.UTF_8);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    try (BufferedReader reader = new
+                            BufferedReader(inputStreamReader)) {
+                        String line = reader.readLine();
+                        while (line != null) {
+                            stringBuilder.append(line).append('\n');
+                            line = reader.readLine();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String contents = stringBuilder.toString();
+                    fileInf.setText(contents);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
