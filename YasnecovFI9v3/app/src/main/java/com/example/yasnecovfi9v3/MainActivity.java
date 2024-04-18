@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -87,16 +88,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 filename = FileName.getText().toString() + ".txt";
                 String fileContents = FileStore.getText().toString() ;
-                //Открываем поток для записи. Если документ не создан, то он будет создан автоматически
-                // МОDE_APPEND - дозаписать в файл
-                try (FileOutputStream fos = context.openFileOutput(filename,
-                        Context.MODE_APPEND)) {
-                    //Записываем текст в файл, переведя его в массив байт
-                    fos.write(fileContents.getBytes());
-                    Toast.makeText(MainActivity.this,"Текст дописан",Toast.LENGTH_SHORT).show();
+                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "MyDirectory");
+                if (dir.exists()) {
+                    File file = new File(dir, filename);
+                    //Открываем поток для записи. Если документ не создан, то он будет создан автоматически
+                    // МОDE_APPEND - дозаписать в файл
+                    try (FileOutputStream fos = new FileOutputStream(file, true)) {
+                        //Записываем текст в файл, переведя его в массив байт
+                        fos.write(fileContents.getBytes());
+                        Toast.makeText(MainActivity.this, "Текст дописан", Toast.LENGTH_SHORT).show();
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
                 }
             }
         });
