@@ -2,10 +2,15 @@ package com.example.yasnecovfi9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     EditText FileName, FileStore;
@@ -26,6 +31,40 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.add_button);
 
         fileInf = findViewById(R.id.textView);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String filename = FileName.getText().toString();
+                String fileContents = FileStore.getText().toString();
+                //Открываем поток для записи. Если документ не создан, то он будетmсоздан автоматически
+                try (FileOutputStream fos = (MainActivity.this).openFileOutput(filename,
+                        Context.MODE_PRIVATE)) {
+                    //Записываем текст в файл, переведя его в массив байт
+                    fos.write(fileContents.getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        readButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
 
