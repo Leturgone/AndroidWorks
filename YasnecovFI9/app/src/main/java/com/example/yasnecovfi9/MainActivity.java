@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         Context.MODE_PRIVATE)) {
                     //Записываем текст в файл, переведя его в массив байт
                     fos.write(fileContents.getBytes());
+                    Toast.makeText(MainActivity.this,"Файл создан",Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     String contents = stringBuilder.toString();
                     fileInf.setText(contents);
                 } catch (IOException e) {
+                    Toast.makeText(MainActivity.this,"Нет файла с таким именем",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
-// Установка кнопки "Отмена" и ее обработчика
+                // Установка кнопки "Отмена" и ее обработчика
                 builder.setNegativeButton("Отмена", new
                         DialogInterface.OnClickListener() {
                             @Override
@@ -132,7 +134,19 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                filename = FileName.getText().toString() + ".txt";
+                String fileContents = FileStore.getText().toString() ;
+                //Открываем поток для записи. Если документ не создан, то он будет создан автоматически
+                // МОDE_APPEND - дозаписать в файл
+                try (FileOutputStream fos = context.openFileOutput(filename,
+                        Context.MODE_APPEND)) {
+                    //Записываем текст в файл, переведя его в массив байт
+                    fos.write(fileContents.getBytes());
+                    Toast.makeText(MainActivity.this,"Текст дописан",Toast.LENGTH_SHORT).show();
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
