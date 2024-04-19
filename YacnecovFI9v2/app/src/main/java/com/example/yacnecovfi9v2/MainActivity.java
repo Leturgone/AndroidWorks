@@ -1,6 +1,6 @@
 package com.example.yacnecovfi9v2;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -21,9 +21,9 @@ import android.Manifest;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+
 
 public class MainActivity extends AppCompatActivity {
 
