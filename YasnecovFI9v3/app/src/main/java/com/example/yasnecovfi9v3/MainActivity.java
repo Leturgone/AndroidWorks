@@ -71,15 +71,14 @@ public class MainActivity extends AppCompatActivity {
                     File file = new File(dir, filename);
                     // Для удаления файла
                     boolean deleted = file.delete();
-                    boolean deleted_dir = dir.delete();
-                    if (deleted && deleted_dir) {
+                    if (deleted) {
                         Toast.makeText(MainActivity.this, "Файл удален", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Директория не найдена", Toast.LENGTH_SHORT).show();
                 }
             }
         });
