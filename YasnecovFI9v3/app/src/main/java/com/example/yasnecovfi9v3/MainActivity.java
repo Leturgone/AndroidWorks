@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 filename = FileName.getText().toString() + ".txt";
                 String fileContents = FileStore.getText().toString() ;
-                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "MyDirectory");
+                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 filename = FileName.getText().toString() + ".txt";
                 String fileContents = FileStore.getText().toString() ;
-                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "MyDirectory");
+                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                 if (dir.exists()) {
                     File file = new File(dir, filename);
                     // Для удаления файла
@@ -88,11 +88,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 filename = FileName.getText().toString() + ".txt";
                 String fileContents = FileStore.getText().toString() ;
-                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "MyDirectory");
+                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                 if (dir.exists()) {
                     File file = new File(dir, filename);
-                    //Открываем поток для записи. Если документ не создан, то он будет создан автоматически
-                    // МОDE_APPEND - дозаписать в файл
                     try (FileOutputStream fos = new FileOutputStream(file, true)) {
                         //Записываем текст в файл, переведя его в массив байт
                         fos.write(fileContents.getBytes());
