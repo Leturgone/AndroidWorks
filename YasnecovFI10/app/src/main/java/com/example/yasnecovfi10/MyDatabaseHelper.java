@@ -46,14 +46,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_POSTER + " BLOB, "+
                 COLUMN_LEGTH+ " TEXT);";
         db.execSQL(query);
-
     }
-
-
-    public SQLiteDatabase open()throws SQLException {
-        return SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
-    }
-
 
 
     @Override
