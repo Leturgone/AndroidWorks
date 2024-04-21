@@ -1,15 +1,21 @@
 package com.example.yasnecovfi10;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
+
+import java.io.ByteArrayOutputStream;
+
 public class Movie {
     private int _id;
     private String movie_title;
     private String movie_director;
     private String movie_year;
     private String movie_description;
-    private String movie_poster;
+    private ImageView movie_poster;
     private String movie_length;
 
-    public Movie(int _id, String movie_title, String movie_director, String movie_year, String movie_description, String movie_poster, String movie_length) {
+    public Movie(int _id, String movie_title, String movie_director, String movie_year, String movie_description, ImageView movie_poster, String movie_length) {
         this._id = _id;
         this.movie_title = movie_title;
         this.movie_director = movie_director;
@@ -59,11 +65,11 @@ public class Movie {
         this.movie_description = movie_description;
     }
 
-    public String getMovie_poster() {
+    public ImageView getMovie_poster() {
         return movie_poster;
     }
 
-    public void setMovie_poster(String movie_poster) {
+    public void setMovie_poster(ImageView movie_poster) {
         this.movie_poster = movie_poster;
     }
 
@@ -74,4 +80,6 @@ public class Movie {
     public void setMovie_length(String movie_length) {
         this.movie_length = movie_length;
     }
+
+
 }

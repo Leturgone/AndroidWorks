@@ -8,8 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment"
-        android:layout_width="360dp"
-        android:layout_height="208dp"
+        android:layout_width="400dp"
+        android:layout_height="191dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"

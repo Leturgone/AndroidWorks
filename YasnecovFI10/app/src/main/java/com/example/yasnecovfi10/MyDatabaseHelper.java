@@ -1,18 +1,16 @@
 package com.example.yasnecovfi10;
 
+import android.content.ContentValues;
 import android.content.Context;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
@@ -28,7 +26,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_YEAR ="movie_year";
     private static final String COLUMN_DESCRIPTION ="movie_description";
     private static final String COLUMN_POSTER ="movie_poster";
-    private static  final String COLUMN_LEGTH = "movie_length";
+    private static  final String COLUMN_LENGTH = "movie_length";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,7 +42,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_YEAR + " TEXT, "+
                 COLUMN_DESCRIPTION + " TEXT, "+
                 COLUMN_POSTER + " BLOB, "+
-                COLUMN_LEGTH+ " TEXT);";
+                COLUMN_LENGTH + " TEXT);";
         db.execSQL(query);
     }
 
@@ -54,4 +52,29 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME); //удаляет таблицу
         onCreate(db);
     }
+    public  boolean addMovie(Movie movie){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TITLE,movie.getMovie_title());
+        cv.put(COLUMN_DIRECTOR,movie.getMovie_director());
+        cv.put(COLUMN_YEAR,movie.getMovie_year());
+        cv.put(COLUMN_DESCRIPTION,movie.getMovie_description());
+        cv.put(COLUMN_POSTER,ImageToBlob(movie.getMovie_poster()));
+        cv.put(COLUMN_LENGTH,movie.getMovie_length());
+        long result = db.insert(TABLE_NAME,null,cv);
+        db.close();
+        return  result !=-1;
+
+    }
+
+    private byte[] ImageToBlob(ImageView image){
+        // Получение изображения из ImageView
+        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        // Преобразование Bitmap в массив байтов
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        return bos.toByteArray();
+    }
+
 }
