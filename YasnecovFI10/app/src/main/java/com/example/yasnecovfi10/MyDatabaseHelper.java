@@ -2,6 +2,7 @@ package com.example.yasnecovfi10;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
@@ -77,13 +78,31 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Movie findMovie(String title, String year){
-
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME,
+                new String[]{COLUMN_ID,COLUMN_TITLE,COLUMN_DIRECTOR, COLUMN_YEAR,COLUMN_DESCRIPTION, COLUMN_POSTER,COLUMN_LENGTH },
+                COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { title, year },null,null,null);
+        if(cursor != null && cursor.moveToFirst()){
+            int id = cursor.getInt(1);
+            String m_title = cursor.getString(2);
+            String m_director = cursor.getString(3);
+            String m_year = cursor.getString(4);
+            String m_description = cursor.getString(5);
+            Bitmap m_poster = BlobToImage(cursor.getBlob(6));
+            String m_length = cursor.getString(7);
+            Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length);
+            cursor.close();
+            db.close();
+            return movie;
+        }
+        else if (cursor != null){
+            cursor.close();
+        }
+        db.close();
+        return null;
     }
 
-    private byte[] ImageToBlob(ImageView image){
-        // Получение изображения из ImageView
-        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
+    private byte[] ImageToBlob(Bitmap bitmap){
         // Преобразование Bitmap в массив байтов
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
