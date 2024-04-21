@@ -126,6 +126,21 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return movieList;
     }
+    public boolean updateMovie(String old_title, String old_year,Movie update_movie){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TITLE,update_movie.getMovie_title());
+        cv.put(COLUMN_DIRECTOR,update_movie.getMovie_director());
+        cv.put(COLUMN_YEAR,update_movie.getMovie_year());
+        cv.put(COLUMN_DESCRIPTION,update_movie.getMovie_description());
+        cv.put(COLUMN_POSTER,ImageToBlob(update_movie.getMovie_poster()));
+        cv.put(COLUMN_LENGTH,update_movie.getMovie_length());
+        //Обновляем запись, где название и год фильма равны old_title и old_year
+        int result = db.update(TABLE_NAME,cv,COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { old_title, old_year });
+        db.close();
+        return  result >0;
+
+    }
 
     private byte[] ImageToBlob(Bitmap bitmap){
         // Преобразование Bitmap в массив байтов
