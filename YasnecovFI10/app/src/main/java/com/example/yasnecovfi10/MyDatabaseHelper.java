@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
@@ -100,6 +102,29 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return null;
+    }
+
+    public List<Movie> getAllMovies(){
+        List<Movie> movieList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " +
+                TABLE_NAME, null);
+        if(cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(1);
+                String m_title = cursor.getString(2);
+                String m_director = cursor.getString(3);
+                String m_year = cursor.getString(4);
+                String m_description = cursor.getString(5);
+                Bitmap m_poster = BlobToImage(cursor.getBlob(6));
+                String m_length = cursor.getString(7);
+                Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length);
+                movieList.add(movie);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return movieList;
     }
 
     private byte[] ImageToBlob(Bitmap bitmap){
