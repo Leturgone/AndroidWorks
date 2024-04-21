@@ -69,6 +69,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public  boolean deleteMovie(String title, String year){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TABLE_NAME, COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?", new String[] { title, year });
+        db.close();
+        return result >0;
+    }
+
+    public Movie findMovie(String title, String year){
+
+    }
+
     private byte[] ImageToBlob(ImageView image){
         // Получение изображения из ImageView
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
