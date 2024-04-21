@@ -13,8 +13,8 @@ public class BaseActivity extends AppCompatActivity {
     EditText editMovieTitle, editDirector, editYear, editDescription, editLength;
     ImageView editImage;
     Button saveButton, updateButton, deleteButton,findButton;
+    RecyclerView movieList;
 
-    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,7 @@ public class BaseActivity extends AppCompatActivity {
         updateButton = findViewById(R.id.update_button);
         deleteButton = findViewById(R.id.delete_button);
         findButton = findViewById(R.id.find_button);
+        movieList = findViewById(R.id.recyclerView);
 
         myDB = new MyDatabaseHelper(BaseActivity.this);
         

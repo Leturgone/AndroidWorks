@@ -1,6 +1,7 @@
 package com.example.yasnecovfi10;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     TextView user_data;
     EditText editText;
     SharedPreferences sharedPreferences;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
