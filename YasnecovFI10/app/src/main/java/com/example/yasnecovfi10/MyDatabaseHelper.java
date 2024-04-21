@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
 
@@ -52,6 +53,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME); //удаляет таблицу
         onCreate(db);
     }
+
     public  boolean addMovie(Movie movie){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -75,6 +77,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
         return bos.toByteArray();
+    }
+    private  Bitmap BlobToImage(byte[] image){
+        // Преобразование массива байтов в Bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+        return bitmap;
     }
 
 }
