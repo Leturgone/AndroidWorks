@@ -34,6 +34,7 @@ public class BaseActivity extends AppCompatActivity {
         editDescription = findViewById(R.id.editDescription);
         editLength = findViewById(R.id.editLength);
         editImage = findViewById(R.id.imgGallery);
+
         saveButton = findViewById(R.id.save_button);
         updateButton = findViewById(R.id.update_button);
         deleteButton = findViewById(R.id.delete_button);
@@ -46,6 +47,32 @@ public class BaseActivity extends AppCompatActivity {
         MovieAdapter adapter = new MovieAdapter(movies);
         movieList.setLayoutManager(new LinearLayoutManager(this));
         movieList.setAdapter(adapter);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title =
+
+            }
+        });
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
