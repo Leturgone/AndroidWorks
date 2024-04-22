@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -51,8 +52,21 @@ public class BaseActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title =
+                String title = editMovieTitle.getText().toString();
+                String director = editDirector.getText().toString();
+                String year = editYear.getText().toString();
+                String description = editDescription.getText().toString();
+                String length = editLength.getText().toString();
+                Movie movie = new Movie(0,title,director,year,description,editImage,length);
+                if (myDB.addMovie(movie)){
+                    movies.add(movie);
+                    adapter.notifyItemInserted(movies.size() - 1);
+                    Toast.makeText(BaseActivity.this, "Фильм сохранен", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(BaseActivity.this, "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
 
+                }
             }
         });
         updateButton.setOnClickListener(new View.OnClickListener() {
