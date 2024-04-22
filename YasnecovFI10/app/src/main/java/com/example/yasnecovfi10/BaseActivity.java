@@ -86,8 +86,10 @@ public class BaseActivity extends AppCompatActivity {
                         old_title,old_year,new_title,new_director,new_year,new_description,editImage,new_length
                 )){
                     Toast.makeText(BaseActivity.this, "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
-
-
+                    refreshMoviesList(myDB,movies,adapter,movieList);
+                }
+                else{
+                    Toast.makeText(BaseActivity.this, "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
                 }
 
 
