@@ -85,13 +85,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{COLUMN_ID,COLUMN_TITLE,COLUMN_DIRECTOR, COLUMN_YEAR,COLUMN_DESCRIPTION, COLUMN_POSTER,COLUMN_LENGTH },
                 COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { title, year },null,null,null);
         if(cursor != null && cursor.moveToFirst()){
-            int id = cursor.getInt(1);
-            String m_title = cursor.getString(2);
-            String m_director = cursor.getString(3);
-            String m_year = cursor.getString(4);
-            String m_description = cursor.getString(5);
-            Bitmap m_poster = BlobToImage(cursor.getBlob(6));
-            String m_length = cursor.getString(7);
+            int id = cursor.getInt(0);
+            String m_title = cursor.getString(1);
+            String m_director = cursor.getString(2);
+            String m_year = cursor.getString(3);
+            String m_description = cursor.getString(4);
+            Bitmap m_poster = BlobToImage(cursor.getBlob(5));
+            String m_length = cursor.getString(6);
             Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length);
             cursor.close();
             db.close();
@@ -111,13 +111,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 TABLE_NAME, null);
         if(cursor.moveToFirst()){
             do{
-                int id = cursor.getInt(1);
-                String m_title = cursor.getString(2);
-                String m_director = cursor.getString(3);
-                String m_year = cursor.getString(4);
-                String m_description = cursor.getString(5);
-                Bitmap m_poster = BlobToImage(cursor.getBlob(6));
-                String m_length = cursor.getString(7);
+                int id = cursor.getInt(0);
+                String m_title = cursor.getString(1);
+                String m_director = cursor.getString(2);
+                String m_year = cursor.getString(3);
+                String m_description = cursor.getString(4);
+                Bitmap m_poster = BlobToImage(cursor.getBlob(5));
+                String m_length = cursor.getString(6);
                 Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length);
                 movieList.add(movie);
             }while(cursor.moveToNext());
