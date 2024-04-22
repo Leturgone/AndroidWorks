@@ -78,8 +78,31 @@ public class BaseActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String title = editMovieTitle.getText().toString();
+                String year = editYear.getText().toString();
+                if (myDB.deleteMovie(title,year)){
+                    int position = -1;
+                    for (int i = 0;i < movies.size(); i++){
+                        if (movies.get(i).getMovie_title().equals(title)
+                                && movies.get(i).getMovie_year().equals(year)){
+                            position = i;
+                            movies.remove(i);
+                            break;
+                        }
+                    }
+                    if (position != -1){
+                        adapter.notifyItemRemoved(position);
+                        Toast.makeText(BaseActivity.this, "Фильм удален", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(BaseActivity.this, "Фильм не найден", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(BaseActivity.this, "Ошибка при удалении фильма", Toast.LENGTH_SHORT).show();
+                }
             }
+
         });
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
