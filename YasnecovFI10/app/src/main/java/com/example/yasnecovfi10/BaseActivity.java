@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BaseActivity extends AppCompatActivity {
     MyDatabaseHelper myDB;
-    EditText editMovieTitle, editDirector, editYear, editDescription, editLength;
+    EditText editMovieTitle, editDirector, editYear, editDescription, editLength, editOldTitle, editOldYear;
     ImageView editImage;
     Button saveButton, updateButton, deleteButton,findButton;
     RecyclerView movieList;
@@ -72,6 +72,17 @@ public class BaseActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editOldTitle = findViewById(R.id.oldTitle);
+                editOldYear = findViewById(R.id.oldYear);
+                String old_title = editOldTitle.getText().toString();
+                String old_year = editOldYear.getText().toString();
+                String new_title = editMovieTitle.getText().toString();
+                String new_director = editDirector.getText().toString();
+                String new_year = editYear.getText().toString();
+                String new_description = editDescription.getText().toString();
+                String new_length = editLength.getText().toString();
+
+
 
             }
         });
@@ -107,7 +118,19 @@ public class BaseActivity extends AppCompatActivity {
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String title = editMovieTitle.getText().toString();
+                String year = editYear.getText().toString();
+                Movie foundMovie = myDB.findMovie(title,year);
+                if (foundMovie != null){
+                    editDirector.setText(foundMovie.getMovie_director());
+                    editDescription.setText(foundMovie.getMovie_description());
+                    editLength.setText(foundMovie.getMovie_length());
+                    editImage.setImageBitmap(foundMovie.getMovie_poster());
+                    Toast.makeText(BaseActivity.this, "Фильм найден", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(BaseActivity.this, "Фильм не найден", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
