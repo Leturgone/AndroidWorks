@@ -87,6 +87,7 @@ public class BaseActivity extends AppCompatActivity {
                 )){
                     Toast.makeText(BaseActivity.this, "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
 
+
                 }
 
 
@@ -163,7 +164,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
     // Метод для обновления списка фильмов после изменения в базе данных
-    private void refreshContactsList(MyDatabaseHelper dbHelper,
+    private void refreshMoviesList(MyDatabaseHelper dbHelper,
                                      List<Movie> movies, MovieAdapter adapter, RecyclerView
                                              movieList) {
         movies = dbHelper.getAllMovies(); // Загружаем обновленный список
