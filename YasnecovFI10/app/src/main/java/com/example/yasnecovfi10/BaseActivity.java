@@ -22,6 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     ImageView editImage;
     Button saveButton, updateButton, deleteButton,findButton;
     RecyclerView movieList;
+    List<Movie> movies;
     private final  int GALLERY_REQUEST_CODE = 1000;
 
     @Override
@@ -44,7 +45,7 @@ public class BaseActivity extends AppCompatActivity {
         movieList = findViewById(R.id.recyclerView);
         myDB = new MyDatabaseHelper(BaseActivity.this);
 
-        List<Movie> movies = myDB.getAllMovies();
+        movies = myDB.getAllMovies();
         MovieAdapter adapter = new MovieAdapter(movies);
         movieList.setLayoutManager(new LinearLayoutManager(this));
         movieList.setAdapter(adapter);
@@ -61,6 +62,7 @@ public class BaseActivity extends AppCompatActivity {
                 if (myDB.addMovie(movie)){
                     movies.add(movie);
                     adapter.notifyItemInserted(movies.size() - 1);
+                    refreshMoviesList(myDB,movies,adapter,movieList);
                     Toast.makeText(BaseActivity.this, "Фильм сохранен", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -100,6 +102,7 @@ public class BaseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String title = editMovieTitle.getText().toString();
                 String year = editYear.getText().toString();
+                movies = myDB.getAllMovies();
                 if (myDB.deleteMovie(title,year)){
                     int position = -1;
                     for (int i = 0;i < movies.size(); i++){
@@ -112,7 +115,9 @@ public class BaseActivity extends AppCompatActivity {
                     }
                     if (position != -1){
                         adapter.notifyItemRemoved(position);
+                        refreshMoviesList(myDB,movies,adapter,movieList);
                         Toast.makeText(BaseActivity.this, "Фильм удален", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
                         Toast.makeText(BaseActivity.this, "Фильм не найден", Toast.LENGTH_SHORT).show();
@@ -169,7 +174,7 @@ public class BaseActivity extends AppCompatActivity {
     private void refreshMoviesList(MyDatabaseHelper dbHelper,
                                      List<Movie> movies, MovieAdapter adapter, RecyclerView
                                              movieList) {
-        movies = dbHelper.getAllMovies(); // Загружаем обновленный список
+        movies = dbHelper.getAllMovies(); // Загружаем обновленный список;
         adapter = new MovieAdapter(movies);
         movieList.setAdapter(adapter);
     }
