@@ -82,6 +82,12 @@ public class BaseActivity extends AppCompatActivity {
                 String new_description = editDescription.getText().toString();
                 String new_length = editLength.getText().toString();
 
+                if(myDB.updateMovie(
+                        old_title,old_year,new_title,new_director,new_year,new_description,editImage,new_length
+                )){
+                    Toast.makeText(BaseActivity.this, "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
+
+                }
 
 
             }
@@ -156,4 +162,13 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
     }
+    // Метод для обновления списка фильмов после изменения в базе данных
+    private void refreshContactsList(MyDatabaseHelper dbHelper,
+                                     List<Movie> movies, MovieAdapter adapter, RecyclerView
+                                             movieList) {
+        movies = dbHelper.getAllMovies(); // Загружаем обновленный список
+        adapter = new MovieAdapter(movies);
+        movieList.setAdapter(adapter);
+    }
+
 }
