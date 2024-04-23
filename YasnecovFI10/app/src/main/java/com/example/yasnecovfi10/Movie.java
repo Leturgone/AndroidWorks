@@ -3,6 +3,7 @@ package com.example.yasnecovfi10;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
@@ -22,16 +23,6 @@ public class Movie {
         this.movie_year = movie_year;
         this.movie_description = movie_description;
         this.movie_poster = movie_poster;
-        this.movie_length = movie_length;
-    }
-    public Movie(int _id, String movie_title, String movie_director, String movie_year, String movie_description, ImageView movie_poster, String movie_length) {
-        this._id = _id;
-        this.movie_title = movie_title;
-        this.movie_director = movie_director;
-        this.movie_year = movie_year;
-        this.movie_description = movie_description;
-        BitmapDrawable drawable = (BitmapDrawable) movie_poster.getDrawable();
-        this.movie_poster = drawable.getBitmap();
         this.movie_length = movie_length;
     }
 
