@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -58,17 +60,27 @@ public class BaseActivity extends AppCompatActivity {
                 String year = editYear.getText().toString();
                 String description = editDescription.getText().toString();
                 String length = editLength.getText().toString();
-                Movie movie = new Movie(0,title,director,year,description,editImage,length);
-                if (myDB.addMovie(movie)){
-                    movies.add(movie);
-                    adapter.notifyItemInserted(movies.size() - 1);
-                    refreshMoviesList(myDB,movies,adapter,movieList);
-                    Toast.makeText(BaseActivity.this, "Фильм сохранен", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(BaseActivity.this, "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
+                try {
+                    BitmapDrawable drawable = (BitmapDrawable) editImage.getDrawable();
+                    Movie movie = new Movie(0,title,director,year,description,drawable.getBitmap(),length);
+                    if (myDB.addMovie(movie)){
+                        movies.add(movie);
+                        adapter.notifyItemInserted(movies.size() - 1);
+                        refreshMoviesList(myDB,movies,adapter,movieList);
+                        Toast.makeText(BaseActivity.this, "Фильм сохранен", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(BaseActivity.this, "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
 
+                    }
+                }catch (ClassCastException e){
+                    // Обработка исключения
+                    e.printStackTrace();
+
+                    // Показать уведомление пользователю
+                    Toast.makeText(BaseActivity.this, "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
         updateButton.setOnClickListener(new View.OnClickListener() {
@@ -83,15 +95,23 @@ public class BaseActivity extends AppCompatActivity {
                 String new_year = editYear.getText().toString();
                 String new_description = editDescription.getText().toString();
                 String new_length = editLength.getText().toString();
+                try {
+                    BitmapDrawable drawable = (BitmapDrawable) editImage.getDrawable();
+                    if (myDB.updateMovie(
 
-                if(myDB.updateMovie(
-                        old_title,old_year,new_title,new_director,new_year,new_description,editImage,new_length
-                )){
-                    Toast.makeText(BaseActivity.this, "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
-                    refreshMoviesList(myDB,movies,adapter,movieList);
-                }
-                else{
-                    Toast.makeText(BaseActivity.this, "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
+                            old_title, old_year, new_title, new_director, new_year, new_description, drawable.getBitmap(), new_length
+                    )) {
+                        Toast.makeText(BaseActivity.this, "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
+                        refreshMoviesList(myDB, movies, adapter, movieList);
+                    } else {
+                        Toast.makeText(BaseActivity.this, "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
+                    }
+                }catch (ClassCastException e){
+                    // Обработка исключения
+                    e.printStackTrace();
+
+                    // Показать уведомление пользователю
+                    Toast.makeText(BaseActivity.this, "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
                 }
 
 
