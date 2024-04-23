@@ -126,15 +126,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return movieList;
     }
-    public boolean updateMovie(String old_title, String old_year,String new_title, String new_director, String new_year,String new_description, ImageView new_poster,String new_length){
+    public boolean updateMovie(String old_title, String old_year,String new_title, String new_director, String new_year,String new_description, Bitmap new_poster,String new_length){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_TITLE,new_title);
         cv.put(COLUMN_DIRECTOR,new_director);
         cv.put(COLUMN_YEAR,new_year);
         cv.put(COLUMN_DESCRIPTION,new_description);
-        BitmapDrawable drawable = (BitmapDrawable) new_poster.getDrawable();
-        cv.put(COLUMN_POSTER,ImageToBlob(drawable.getBitmap()));
+        cv.put(COLUMN_POSTER,ImageToBlob(new_poster));
         cv.put(COLUMN_LENGTH,new_length);
         //Обновляем запись, где название и год фильма равны old_title и old_year
         int result = db.update(TABLE_NAME,cv,COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { old_title, old_year });
