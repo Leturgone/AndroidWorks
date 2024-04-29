@@ -2,6 +2,7 @@ package com.example.yasnecovfi11;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -12,7 +13,7 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private EditText editText;
-    private Button enter_button;
+    private Button enter_button, next_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,12 +25,20 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true); //Включаем поддержку JavaScript
 
         enter_button = findViewById(R.id.enterBtn);
+        next_button = findViewById(R.id.next_button);
         editText = findViewById(R.id.editTextText);
         enter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String url = editText.getText().toString();
                 webView.loadUrl(url); //Загрузка страницы
+            }
+        });
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MusicActivity.class);
+                startActivity(intent);
             }
         });
     }
