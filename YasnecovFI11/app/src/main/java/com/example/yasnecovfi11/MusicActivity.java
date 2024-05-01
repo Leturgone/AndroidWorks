@@ -1,6 +1,7 @@
 package com.example.yasnecovfi11;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.animation.ObjectAnimator;
 import android.graphics.drawable.Drawable;
@@ -25,7 +26,7 @@ public class MusicActivity extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         try {
             mediaPlayer.setDataSource("https://www.televisiontunes.co.uk/themes/Benny%20Hill.mp3");
-                    mediaPlayer.prepareAsync();
+                    mediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,12 +34,13 @@ public class MusicActivity extends AppCompatActivity {
         fun_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (!mediaPlayer.isPlaying()){
-                    //mediaPlayer.start();
-                    imageView.setImageDrawable(Drawable.createFromPath("@drawable/omg"));
+                    mediaPlayer.start();
+                    imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.omg));
                     ObjectAnimator rotateAnim =
                             ObjectAnimator.ofFloat(imageView, "rotation", 0f, 360f);
-                    rotateAnim.setDuration(20000000);
+                    rotateAnim.setDuration(800);
                     rotateAnim.setRepeatCount(ObjectAnimator.INFINITE);
                     rotateAnim.setRepeatMode(ObjectAnimator.RESTART);
                     rotateAnim.start();
