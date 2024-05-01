@@ -1,11 +1,15 @@
 package com.example.yasnecovfi11;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import android.animation.ObjectAnimator;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +21,12 @@ public class MusicActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     private Button fun_button;
     private ImageView imageView;
+    private static final String CHANNEL_ID = "funny_channel";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
-
+        createNotificationChannel();
         imageView = findViewById(R.id.imageView);
         mediaPlayer = new MediaPlayer();
         try {
@@ -37,6 +42,14 @@ public class MusicActivity extends AppCompatActivity {
 
                 if (!mediaPlayer.isPlaying()){
                     mediaPlayer.start();
+
+                    NotificationCompat.Builder builder = new
+                            NotificationCompat.Builder(MusicActivity.this, CHANNEL_ID).setSmallIcon(R.drawable.omg)
+                            .setContentTitle("Уведомление").setContentText("Началось веселье").setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                    notificationManager.notify(1, builder.build());
+
+
                     imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.omg));
                     ObjectAnimator rotateAnim =
                             ObjectAnimator.ofFloat(imageView, "rotation", 0f, 360f);
@@ -50,7 +63,6 @@ public class MusicActivity extends AppCompatActivity {
                             ObjectAnimator.ofFloat(fun_button, "scaleY", 1f, 2f);
                     scaleX.setDuration(100);
                     scaleY.setDuration(150);
-
                     scaleX.start();
                     scaleY.start();
                     rotateAnim.start();
@@ -61,6 +73,9 @@ public class MusicActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -70,4 +85,21 @@ public class MusicActivity extends AppCompatActivity {
             mediaPlayer = null;
         }
     }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            CharSequence name = "Funny Channel";
+            String description = "Channel for funny notifications";
+            int importance =
+                    NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new
+                    NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager =
+                    getSystemService(NotificationManager.class);
+
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 }
