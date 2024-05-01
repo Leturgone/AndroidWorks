@@ -43,6 +43,16 @@ public class MusicActivity extends AppCompatActivity {
                     rotateAnim.setDuration(800);
                     rotateAnim.setRepeatCount(ObjectAnimator.INFINITE);
                     rotateAnim.setRepeatMode(ObjectAnimator.RESTART);
+
+                    ObjectAnimator scaleX =
+                            ObjectAnimator.ofFloat(fun_button, "scaleX", 1f, 2f);
+                    ObjectAnimator scaleY =
+                            ObjectAnimator.ofFloat(fun_button, "scaleY", 1f, 2f);
+                    scaleX.setDuration(100);
+                    scaleY.setDuration(150);
+
+                    scaleX.start();
+                    scaleY.start();
                     rotateAnim.start();
                 }
                 else{
