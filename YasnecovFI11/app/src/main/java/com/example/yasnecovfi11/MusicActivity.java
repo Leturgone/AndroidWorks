@@ -5,8 +5,11 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import android.animation.ObjectAnimator;
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -18,10 +21,11 @@ import android.widget.ImageView;
 import java.io.IOException;
 
 public class MusicActivity extends AppCompatActivity {
+
     private MediaPlayer mediaPlayer;
     private Button fun_button;
     private ImageView imageView;
-    private static final String CHANNEL_ID = "funny_channel";
+    public static final String CHANNEL_ID = "funny_channel";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +48,12 @@ public class MusicActivity extends AppCompatActivity {
                     mediaPlayer.start();
 
                     NotificationCompat.Builder builder = new
-                            NotificationCompat.Builder(MusicActivity.this, CHANNEL_ID).setSmallIcon(R.drawable.omg)
+                            NotificationCompat.Builder(MusicActivity.this, CHANNEL_ID).setSmallIcon(R.drawable.ic_notification)
                             .setContentTitle("Уведомление").setContentText("Началось веселье").setPriority(NotificationCompat.PRIORITY_DEFAULT);
                     NotificationManager notificationManager = getSystemService(NotificationManager.class);
                     notificationManager.notify(1, builder.build());
 
+                    scheduleNotification(10000);
 
                     imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.omg));
                     ObjectAnimator rotateAnim =
@@ -101,5 +106,19 @@ public class MusicActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
+    private void scheduleNotification(long delay) {
+        Intent notificationIntent = new Intent(this,
+                AlarmReceiver.class);
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(this, 0, notificationIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT |
+                                PendingIntent.FLAG_IMMUTABLE);
+        AlarmManager alarmManager = (AlarmManager)
+                getSystemService(ALARM_SERVICE);
+        long futureInMillis = System.currentTimeMillis() +
+                delay;
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
+    }
+
 
 }
