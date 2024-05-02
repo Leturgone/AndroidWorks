@@ -6,18 +6,20 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class MovieProvider extends ContentProvider {
-    public static final Uri CONTENT_URI = Uri.parse("content://com.example.app.provider/movies");
+    public static final Uri CONTENT_URI = Uri.parse("content://com.example.app.provider/my_movies");
 
     private SQLiteDatabase db;
     @Override
     public boolean onCreate() {
         MyDatabaseHelper dbHelper = new MyDatabaseHelper(getContext());
         db = dbHelper.getWritableDatabase();
+        Log.i("PROVAIDER","Провайдер создан");
         return (db != null);
     }
 

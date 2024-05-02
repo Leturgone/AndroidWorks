@@ -32,7 +32,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_TITLE + " TEXT, "+
                         COLUMN_YEAR + " TEXT);";
         db.execSQL(query);
-        db.execSQL("INSERT OR IGNORE INTO TABLE_NAME VALUES ('Drive', '2011'), ('Cruella', '2021');");
+        db.execSQL("INSERT OR IGNORE INTO  "+ TABLE_NAME + " VALUES (1,'Drive', '2011'), (2,'Cruella', '2021');");
     }
 
     @Override
