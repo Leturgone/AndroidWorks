@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
                 String json = gson.toJson(movie);
                 FileWriter fileWriter = null;
                 try {
-                    fileWriter = new FileWriter(getFilesDir()+"jsonFile.json");
+                    fileWriter = new FileWriter(getFilesDir()+"/jsonFile.json");
                     fileWriter.write(json);
                     fileWriter.close();
-                    Toast.makeText(MainActivity.this, "Записано в " + getFilesDir()+"jsonFile.json", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Записано в " + getFilesDir()+"/jsonFile.json", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FileReader fileReader = null;
                 try {
-                    fileReader = new FileReader(getFilesDir()+ "jsonFile.json");
+                    fileReader = new FileReader(getFilesDir()+ "/jsonFile.json");
                     Gson gson = new Gson();
                     Movie movie = gson.fromJson(fileReader,Movie.class);
 

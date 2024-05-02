@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046" />
+        app:layout_constraintVertical_bias="0.12" />
 
     <EditText
         android:id="@+id/editTextMovieYear"
@@ -49,10 +49,12 @@
         android:ems="10"
         android:hint="Год выхода"
         android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="103dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
         android:id="@+id/json_upload_button"
