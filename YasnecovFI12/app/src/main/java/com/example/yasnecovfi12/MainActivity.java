@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     fileReader = new FileReader(getFilesDir()+ "jsonFile.json");
                     Gson gson = new Gson();
-                    //String json = gson.fromJson(fileReader, String.class);
                     Movie movie = gson.fromJson(fileReader,Movie.class);
 
                     movieTxt.setText(movie.getMovie_title());
