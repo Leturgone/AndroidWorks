@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".MovieProvider"
+            android:authorities="com.example.app.provider"
+            android:exported="true"
+            android:permission="android.permission.READ_PROVIDER" />
     </application>
+
 
 </manifest>
