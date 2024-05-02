@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
     MyDatabaseHelper myDB;
     Button create_button,load_button, json_upload_button, json_download_button;
@@ -73,7 +78,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String title = movieEditTxt.getText().toString();
                 String year = yearEditTxt.getText().toString();
-
+                Movie movie = new Movie(title,year);
+                Gson gson = new Gson();
+                String json = gson.toJson(movie);
+                FileWriter fileWriter = null;
+                try {
+                    fileWriter = new FileWriter(getFilesDir()+"jsonFile.json");
+                    fileWriter.write(json);
+                    fileWriter.close();
+                    Toast.makeText(MainActivity.this, "Записано в " + getFilesDir()+"jsonFile.json", Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
