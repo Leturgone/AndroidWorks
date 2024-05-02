@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -90,6 +92,25 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            }
+        });
+        json_download_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FileReader fileReader = null;
+                try {
+                    fileReader = new FileReader(getFilesDir()+ "jsonFile.json");
+                    Gson gson = new Gson();
+                    //String json = gson.fromJson(fileReader, String.class);
+                    Movie movie = gson.fromJson(fileReader,Movie.class);
+
+                    movieTxt.setText(movie.getMovie_title());
+                    yearTxt.setText(movie.getMovie_year());
+
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         });
 
