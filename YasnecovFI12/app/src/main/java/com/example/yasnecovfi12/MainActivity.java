@@ -8,10 +8,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     MyDatabaseHelper myDB;
+    Button create_button,load_button, json_upload_button, json_download_button;
+    TextView movieTxt, yearTxt;
+    EditText movieEditTxt, yearEditTxt;
     public static final Uri CONTENT_URI = Uri.parse("content://com.example.app.provider/my_movies");
 
 
@@ -19,8 +24,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button create_button =  findViewById(R.id.create_button);
-        Button load_button = findViewById(R.id.load_button);
+        create_button =  findViewById(R.id.create_button);
+        load_button = findViewById(R.id.load_button);
+        json_download_button = findViewById(R.id.json_download_button);
+        json_upload_button = findViewById(R.id.json_upload_button);
+        movieTxt = findViewById(R.id.textViewMovie);
+        yearTxt = findViewById(R.id.textViewYar);
+        movieEditTxt = findViewById(R.id.editTextMovieTitle);
+        yearEditTxt = findViewById(R.id.editTextMovieYear);
+
         create_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
                         cursor.close(); // Важно закрыть курсор после использования
                     }
                 }
+            }
+        });
+        json_upload_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = movieEditTxt.getText().toString();
+                String year = yearEditTxt.getText().toString();
+
             }
         });
 
